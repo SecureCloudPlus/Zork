@@ -29,9 +29,9 @@ namespace Zork.Core
             {
                 goto L1000;
             }
-            /* 						!NO EXITS? */
+        /* 						!NO EXITS? */
 
-            L100:
+        L100:
             i = game.Exits.Travel[xi - 1];
             /* 						!GET ENTRY. */
             game.curxt_.xroom1 = i & xpars_.xrmask;
@@ -48,15 +48,15 @@ namespace Zork.Core
             }
             /* 						!BRANCH ON ENTRY. */
             throw new InvalidOperationException();
-            //bug_(10, game.curxt_.xtype);
+        //bug_(10, game.curxt_.xtype);
 
-            L130:
+        L130:
             game.curxt_.xobj = game.Exits.Travel[xi + 1] & xpars_.xrmask;
             game.curxt_.xactio = game.Exits.Travel[xi + 1] / xpars_.xashft;
-            L120:
+        L120:
             game.curxt_.xstrng = game.Exits.Travel[xi];
-            /* 						!DOOR/CEXIT/NEXIT - STRING. */
-            L110:
+        /* 						!DOOR/CEXIT/NEXIT - STRING. */
+        L110:
             xi += xpars_.xelnt[game.curxt_.xtype - 1];
             /* 						!ADVANCE TO NEXT ENTRY. */
             if ((i & xpars_.xdmask) == dir)
@@ -69,13 +69,14 @@ namespace Zork.Core
                 goto L100;
             }
 
-            L1000:
+        L1000:
             ret_val = false;
             /* 						!YES, LOSE. */
             return ret_val;
         } /* findxt_ */
 
         /* FWIM- FIND WHAT I MEAN */
+
         public static int fwim_(Game game, int f1, int f2, int rm, int con, int adv, bool nocare)
         {
             int ret_val, i__1, i__2;
@@ -118,13 +119,13 @@ namespace Zork.Core
                 /* 						!YES, AMBIGUOUS. */
                 return ret_val;
 
-                L400:
+            L400:
                 ret_val = i;
-                /* 						!NOTE MATCH. */
+            /* 						!NOTE MATCH. */
 
-                /* DOES OBJECT CONTAIN A MATCH? */
+            /* DOES OBJECT CONTAIN A MATCH? */
 
-                L500:
+            L500:
                 if ((game.Objects.oflag2[i - 1] & ObjectFlags2.OPENBT) == 0)
                 {
                     goto L1000;
@@ -148,12 +149,12 @@ namespace Zork.Core
                     ret_val = -ret_val;
                     return ret_val;
 
-                    L600:
+                L600:
                     ret_val = j;
-                    L700:
+                L700:
                     ;
                 }
-                L1000:
+            L1000:
                 ;
             }
             return ret_val;
@@ -161,6 +162,7 @@ namespace Zork.Core
 
         /* YESNO- OBTAIN YES/NO ANSWER */
         /* 	YES-IS-TRUE=YESNO(QUESTION,YES-STRING,NO-STRING) */
+
         public static bool yesno_(Game game, int q, int y, int n)
         {
             /* System generated locals */
@@ -169,7 +171,7 @@ namespace Zork.Core
             /* Local variables */
             char[] ans = new char[100];
 
-            L100:
+        L100:
             MessageHandler.rspeak_(game, q);
             /* 						!ASK */
             //(void) fflush(stdout);
@@ -188,14 +190,14 @@ namespace Zork.Core
             /* 						!SCOLD. */
             goto L100;
 
-            L200:
+        L200:
             ret_val = true;
             /* 						!YES, */
             MessageHandler.rspeak_(game, y);
             /* 						!OUT WITH IT. */
             return ret_val;
 
-            L300:
+        L300:
             ret_val = false;
             /* 						!NO, */
             MessageHandler.rspeak_(game, n);

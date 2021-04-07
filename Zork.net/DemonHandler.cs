@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Zork.Core.Object;
 using Zork.Core.Room;
 
@@ -68,15 +66,15 @@ namespace Zork.Core
                 /* 						!YES, WAKE HIM UP. */
                 f = ObjectHandler.oappli_(ra, 0, game);
                 goto L2400;
-                /* 						!NOTHING ELSE HAPPENS. */
+            /* 						!NOTHING ELSE HAPPENS. */
 
-                L2025:
+            L2025:
                 game.Villians.vprob[i - 1] += 10;
                 /* 						!INCREASE WAKEUP PROB. */
                 goto L2400;
-                /* 						!NOTHING ELSE. */
+            /* 						!NOTHING ELSE. */
 
-                L2050:
+            L2050:
                 if ((game.Objects.oflag2[obj - 1] & ObjectFlags2.FITEBT) == 0)
                 {
                     goto L2100;
@@ -85,7 +83,7 @@ namespace Zork.Core
                 /* 						!FIGHTING, SET UP OPP. */
                 goto L2400;
 
-                L2100:
+            L2100:
                 if (ra == 0)
                 {
                     goto L2400;
@@ -103,7 +101,7 @@ namespace Zork.Core
                 /* 						!SET UP OPP. */
                 goto L2400;
 
-                L2200:
+            L2200:
                 if ((game.Objects.oflag2[obj - 1] & ObjectFlags2.FITEBT) == 0 || ra == 0)
                 {
                     goto L2300;
@@ -111,7 +109,7 @@ namespace Zork.Core
                 game.ParserVectors.prsa = (int)VIndices.fightw;
                 /* 						!HAVE A FIGHT. */
                 f = ObjectHandler.oappli_(ra, 0, game);
-                L2300:
+            L2300:
                 if (obj == (int)ObjectIndices.thief)
                 {
                     game.Flags.thfenf = false;
@@ -128,7 +126,7 @@ namespace Zork.Core
                 f = ObjectHandler.oappli_(ra, 0, game);
                 i__2 = game.Objects.ocapac[obj - 1];
                 game.Objects.ocapac[obj - 1] = Math.Abs(i__2);
-                L2400:
+            L2400:
                 ;
             }
             /* FIGHTD, PAGE 3 */
@@ -136,8 +134,8 @@ namespace Zork.Core
             /* NOW DO ACTUAL COUNTERBLOWS. */
 
             output = 0;
-            /* 						!ASSUME HERO OK. */
-            L2600:
+        /* 						!ASSUME HERO OK. */
+        L2600:
             i__1 = game.Villians.Count;
             for (i = 1; i <= i__1; ++i)
             {
@@ -162,8 +160,8 @@ namespace Zork.Core
                 {
                     goto L2700;
                 }
-                /* 						!SPECIAL ACTION. */
-                L2650:
+            /* 						!SPECIAL ACTION. */
+            L2650:
                 res = blow_(game, (int)AIndices.player, j, game.Villians.vmelee[i - 1], false, output);
 
                 /* 						!STRIKE BLOW. */
@@ -176,21 +174,22 @@ namespace Zork.Core
                 {
                     output = game.rnd_(3) + 2;
                 }
-                /* 						!IF HERO OUT, SET FLG. */
-                L2700:
+            /* 						!IF HERO OUT, SET FLG. */
+            L2700:
                 ;
             }
             --output;
             /* 						!DECREMENT OUT COUNT. */
-            if (output > 0) {
+            if (output > 0)
+            {
                 goto L2600;
             }
             /* 						!IF STILL OUT, GO AGAIN. */
             return;
-
         } /* fightd_ */
 
         /* BLOW- STRIKE BLOW */
+
         public static int blow_(Game game, int h, int v, int rmk, bool hflg, int output)
         {
             int rmiss = 0;
@@ -200,13 +199,13 @@ namespace Zork.Core
             int rlose = 6;
             int rhes = 7;
             int rsit = 8;
-            int [] def1r = { 1, 2, 3 };
-            int [] def2r = { 13, 23, 24, 25 };
-            int [] def3r = { 35, 36, 46, 47, 57 };
-            int [] rvectr = { 0,0,0,0,5,5,1,1,2,2,2,2,0,0,0,0,0,5,
+            int[] def1r = { 1, 2, 3 };
+            int[] def2r = { 13, 23, 24, 25 };
+            int[] def3r = { 35, 36, 46, 47, 57 };
+            int[] rvectr = { 0,0,0,0,5,5,1,1,2,2,2,2,0,0,0,0,0,5,
         5,3,3,1,0,0,0,5,5,3,3,3,1,2,2,2,0,0,0,0,0,5,5,3,3,4,4,0,0,0,5,5,
         3,3,3,4,4,4,0,5,5,3,3,3,3,4,4,4 };
-            int [] rstate = { 5000,3005,3008,4011,3015,3018,1021,
+            int[] rstate = { 5000,3005,3008,4011,3015,3018,1021,
         0,0,5022,3027,3030,4033,3037,3040,1043,0,0,4044,2048,4050,4054,
         5058,4063,4067,3071,1074,4075,1079,4080,4084,4088,4092,4096,4100,
         1104,4105,2109,4111,4115,4119,4123,4127,3131,3134 };
@@ -227,7 +226,8 @@ namespace Zork.Core
             /* 						!DESCRIPTION. */
             ret_val = rmiss;
             /* 						!ASSUME NO RESULT. */
-            if (!(hflg)) {
+            if (!(hflg))
+            {
                 goto L1000;
             }
             /* 						!HERO STRIKING BLOW? */
@@ -247,7 +247,7 @@ namespace Zork.Core
             game.Adventurers.Flags[h - 1] &= ~game.astag;
             return ret_val;
 
-            L100:
+        L100:
             att = dso4.fights_(game, h, true);
             /* 						!GET HIS STRENGTH. */
             oa = att;
@@ -283,14 +283,14 @@ namespace Zork.Core
             /* 						!VILLAIN DEAD. */
             return ret_val;
 
-            L300:
+        L300:
             AdventurerHandler.jigsup_(game, 593);
             /* 						!KILLING SELF. */
             return ret_val;
 
-            /* VILLAIN IS ATTACKER, HERO IS DEFENDER. */
+        /* VILLAIN IS ATTACKER, HERO IS DEFENDER. */
 
-            L1000:
+        L1000:
             pblose = 50;
             /* 						!BAD LK PROB. */
             game.Adventurers.Flags[h - 1] &= ~game.astag;
@@ -303,26 +303,28 @@ namespace Zork.Core
             /* 						!DESCRIBE. */
             return ret_val;
 
-            L1200:
+        L1200:
             att = dso4.vilstr_(game, v);
             /* 						!SET UP ATT, DEF. */
             oa = att;
             def = dso4.fights_(game, h, true);
-            if (def <= 0) {
+            if (def <= 0)
+            {
                 return ret_val;
             }
             /* 						!DONT ALLOW DEAD DEF. */
             od = dso4.fights_(game, h, false);
             i__1 = Parser.fwim_(0, (int)ObjectFlags2.WEAPBT, 0, 0, h, true, game);
             dweap = Math.Abs(i__1);
-            /* 						!FIND A WEAPON. */
-            /* BLOW, PAGE 4 */
+        /* 						!FIND A WEAPON. */
+        /* BLOW, PAGE 4 */
 
-            /* PARTIES ARE NOW EQUIPPED.  DEF CANNOT BE ZERO. */
-            /* ATT MUST BE > 0. */
+        /* PARTIES ARE NOW EQUIPPED.  DEF CANNOT BE ZERO. */
+        /* ATT MUST BE > 0. */
 
-            L2000:
-            if (def > 0) {
+        L2000:
+            if (def > 0)
+            {
                 goto L2100;
             }
             /* 						!DEF ALIVE? */
@@ -335,30 +337,35 @@ namespace Zork.Core
             /* 						!DEADER. */
             goto L3000;
 
-            L2100:
-            if ((i__1 = def - 2) < 0) {
+        L2100:
+            if ((i__1 = def - 2) < 0)
+            {
                 goto L2200;
-            } else if (i__1 == 0) {
+            }
+            else if (i__1 == 0)
+            {
                 goto L2300;
-            } else {
+            }
+            else
+            {
                 goto L2400;
             }
-            /* 						!DEF <2,=2,>2 */
-            L2200:
+        /* 						!DEF <2,=2,>2 */
+        L2200:
             att = Math.Min(att, 3);
             /* 						!SCALE ATT. */
             tbl = def1r[att - 1];
             /* 						!CHOOSE TABLE. */
             goto L2500;
 
-            L2300:
+        L2300:
             att = Math.Min(att, 4);
             /* 						!SCALE ATT. */
             tbl = def2r[att - 1];
             /* 						!CHOOSE TABLE. */
             goto L2500;
 
-            L2400:
+        L2400:
             att -= def;
             /* 						!SCALE ATT. */
             /* Computing MIN */
@@ -367,7 +374,7 @@ namespace Zork.Core
             att = Math.Min(i__1, i__2) + 3;
             tbl = def3r[att - 1];
 
-            L2500:
+        L2500:
             res = rvectr[tbl + game.rnd_(10) - 1];
             /* 						!GET RESULT. */
             if (output == 0)
@@ -384,9 +391,9 @@ namespace Zork.Core
             res = rsit;
             /* 						!OTHERWISE, SITTING. */
             goto L2600;
-            L2550:
+        L2550:
             res = rhes;
-            L2600:
+        L2600:
             if (res == rstag && dweap != 0 && RoomHandler.prob_(game, 25, pblose))
             {
                 res = rlose;
@@ -408,12 +415,12 @@ namespace Zork.Core
             }
 
             MessageHandler.rspsub_(i, j, game);
-            /* 						!PRESENT RESULT. */
-            /* BLOW, PAGE 5 */
+        /* 						!PRESENT RESULT. */
+        /* BLOW, PAGE 5 */
 
-            /* NOW APPLY RESULT */
+        /* NOW APPLY RESULT */
 
-            L3000:
+        L3000:
             switch (res + 1)
             {
                 case 1: goto L4000;
@@ -427,7 +434,7 @@ namespace Zork.Core
                 case 9: goto L3200;
             }
 
-            L3100:
+        L3100:
             if (hflg)
             {
                 def = -def;
@@ -435,12 +442,12 @@ namespace Zork.Core
             /* 						!UNCONSCIOUS. */
             goto L4000;
 
-            L3200:
+        L3200:
             def = 0;
             /* 						!KILLED OR SITTING DUCK. */
             goto L4000;
 
-            L3300:
+        L3300:
             /* Computing MAX */
             i__1 = 0;
             i__2 = def - 1;
@@ -448,7 +455,7 @@ namespace Zork.Core
             /* 						!LIGHT WOUND. */
             goto L4000;
 
-            L3400:
+        L3400:
             /* Computing MAX */
             i__1 = 0;
             i__2 = def - 2;
@@ -456,23 +463,25 @@ namespace Zork.Core
             /* 						!SERIOUS WOUND. */
             goto L4000;
 
-            L3500:
-            if (hflg) {
+        L3500:
+            if (hflg)
+            {
                 goto L3550;
             }
             /* 						!STAGGERED. */
             game.Adventurers.Flags[h - 1] |= game.astag;
             goto L4000;
 
-            L3550:
+        L3550:
             game.Objects.oflag2[v - 1] |= ObjectFlags2.STAGBT;
             goto L4000;
 
-            L3600:
+        L3600:
             ObjectHandler.newsta_(dweap, 0, game.Player.Here, 0, 0, game);
             /* 						!LOSE WEAPON. */
             dweap = 0;
-            if (hflg) {
+            if (hflg)
+            {
                 goto L4000;
             }
 
@@ -480,21 +489,24 @@ namespace Zork.Core
             i__1 = Parser.fwim_(0, (int)ObjectFlags2.WEAPBT, 0, 0, h, true, game);
             dweap = Math.Abs(i__1);
             /* 						!GET NEW. */
-            if (dweap != 0) {
+            if (dweap != 0)
+            {
                 MessageHandler.rspsub_(605, game.Objects.odesc2[dweap - 1], game);
             }
-            /* BLOW, PAGE 6 */
+        /* BLOW, PAGE 6 */
 
-            L4000:
+        L4000:
             ret_val = res;
             /* 						!RETURN RESULT. */
-            if (!(hflg)) {
+            if (!(hflg))
+            {
                 goto L4500;
             }
             /* 						!HERO? */
             game.Objects.ocapac[v - 1] = def;
             /* 						!STORE NEW CAPACITY. */
-            if (def != 0) {
+            if (def != 0)
+            {
                 goto L4100;
             }
             /* 						!DEAD? */
@@ -503,7 +515,8 @@ namespace Zork.Core
             /* 						!HE DIES. */
             ObjectHandler.newsta_(v, 0, 0, 0, 0, game);
             /* 						!MAKE HIM DISAPPEAR. */
-            if (ra == 0) {
+            if (ra == 0)
+            {
                 return ret_val;
             }
             /* 						!IF NX TO DO, EXIT. */
@@ -512,8 +525,9 @@ namespace Zork.Core
             f = ObjectHandler.oappli_(ra, 0, game);
             return ret_val;
 
-            L4100:
-            if (res != rout || ra == 0) {
+        L4100:
+            if (res != rout || ra == 0)
+            {
                 return ret_val;
             }
             game.ParserVectors.prsa = (int)VIndices.outxw;
@@ -521,19 +535,21 @@ namespace Zork.Core
             f = ObjectHandler.oappli_(ra, 0, game);
             return ret_val;
 
-            L4500:
+        L4500:
             game.Adventurers.astren[h - 1] = -10000;
             /* 						!ASSUME DEAD. */
-            if (def != 0) {
+            if (def != 0)
+            {
                 game.Adventurers.astren[h - 1] = def - od;
             }
-            if (def >= od) {
+            if (def >= od)
+            {
                 goto L4600;
             }
             game.Clock.Ticks[(int)ClockIndices.cevcur - 1] = 30;
             game.Clock.Flags[(int)ClockIndices.cevcur - 1] = true;
 
-            L4600:
+        L4600:
             if (dso4.fights_(game, h, true) > 0)
             {
                 return ret_val;
@@ -544,10 +560,10 @@ namespace Zork.Core
             AdventurerHandler.jigsup_(game, 596);
             ret_val = -1;
             return ret_val;
-
         } /* blow_ */
 
         /* SWORDD- SWORD INTERMOVE DEMON */
+
         public static void swordd_(Game game)
         {
             /* System generated locals */
@@ -586,20 +602,20 @@ namespace Zork.Core
                     case 3: goto L50;
                     case 4: goto L50;
                 }
-                /* 						!SEE IF ROOM AT ALL. */
-                L50:
+            /* 						!SEE IF ROOM AT ALL. */
+            L50:
                 if (infest_(game, game.curxt_.xroom1))
                 {
                     goto L300;
                 }
-                /* 						!CHECK ROOM. */
-                L200:
+            /* 						!CHECK ROOM. */
+            L200:
                 ;
             }
             ng = 0;
-            /* 						!NO GLOW. */
+        /* 						!NO GLOW. */
 
-            L300:
+        L300:
             if (ng == game.Hack.swdsta)
             {
                 return;
@@ -611,7 +627,7 @@ namespace Zork.Core
             game.Hack.swdsta = ng;
             return;
 
-            L500:
+        L500:
             game.Hack.swdact = false;
             /* 						!DROPPED SWORD, */
             return;

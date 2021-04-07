@@ -5,11 +5,16 @@ namespace Zork.Core
     public static class MessageHandler
     {
         public static void rspeak_(Game game, int messageNumber) => MessageHandler.Speak(game, messageNumber);
+
         public static void Speak(Game game, int messageNumber) => MessageHandler.Speak(messageNumber, game);
+
         public static void Speak(int messageNumber, Game game) => MessageHandler.rspsb2nl_(messageNumber, 0, 0, true, game);
 
         public static void more_output(string output) => Console.Write(output);
-        public static void more_input() { }
+
+        public static void more_input()
+        {
+        }
 
         /// <summary>
         /// OUTPUT RANDOM MESSAGE WITH SUBSTITUTABLE ARGUMENT
@@ -18,6 +23,7 @@ namespace Zork.Core
         /// <param name="s1"></param>
         /// <param name="game"></param>
         public static void rspsub_(Game game, int messageNumber, int s1 = 0) => rspsub_(messageNumber, s1, game);
+
         public static void rspsub_(int messageNumber, int s1, Game game) => MessageHandler.rspsb2nl_(messageNumber, s1, 0, true, game);
 
         /// <summary>
@@ -28,6 +34,7 @@ namespace Zork.Core
         /// <param name="s2"></param>
         /// <param name="game"></param>
         public static void rspsb2_(Game game, int n, int s1, int s2) => rspsb2_(n, s1, s2, game);
+
         public static void rspsb2_(int n, int s1, int s2, Game game) => rspsb2nl_(n, s1, s2, true, game);
 
         /// <summary>

@@ -157,7 +157,6 @@ namespace Zork.Core.Helpers
                 int value = ReadInt(bytes, game);
                 list[index] = value;
             }
-
         }
 
         private static void ReadFlags(int count, List<bool> flags, byte[] bytes, Game game)
@@ -167,7 +166,6 @@ namespace Zork.Core.Helpers
                 byte value = bytes[game.DataPosition++];
                 if (value != 0 && value != 1)
                 {
-
                 }
 
                 flags.Add(value == 0 ? false : true);

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Zork.Core.Object;
 using Zork.Core.Room;
 
@@ -9,6 +7,7 @@ namespace Zork.Core
     public static class dso7
     {
         /* ENCRYP--	ENCRYPT PASSWORD */
+
         public static void encryp_(Game game, char[] inw, char[] outw)
         {
             string keyw = "ECORMS";
@@ -64,6 +63,7 @@ namespace Zork.Core
         }
 
         /* CPGOTO--	MOVE TO NEXT STATE IN PUZZLE ROOM */
+
         public static void cpgoto_(Game game, int st)
         {
             int i__1, i__2;
@@ -90,6 +90,7 @@ namespace Zork.Core
         }
 
         /* CPINFO--	DESCRIBE PUZZLE ROOM */
+
         public static void cpinfo_(Game game, int rmk, int st)
         {
             int[] dgmoft = { -9, -8, -7, -1, 1, 7, 8, 9 };
@@ -120,7 +121,7 @@ namespace Zork.Core
                 {
                     dgm[i - 1] = '?';
                 }
-                L100:
+            L100:
                 ;
             }
 

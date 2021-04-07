@@ -46,19 +46,19 @@ namespace Zork.Core.Clock
                 {
                     goto L100;
                 }
-                /* 						!TIMER EXPIRED? */
-                L50:
+            /* 						!TIMER EXPIRED? */
+            L50:
                 ret_val = true;
                 cevapp_(game, game.Clock.Actions[i - 1]);
-                /* 						!DO ACTION. */
-                L100:
+            /* 						!DO ACTION. */
+            L100:
                 ;
             }
             return ret_val;
-
         }
 
         /* CEVAPP- CLOCK EVENT APPLICABLES */
+
         public static void cevapp_(Game game, int ri)
         {
             int[] cndtck = { 50, 20, 10, 5, 0, 156, 156, 156, 157, 0 };
@@ -68,7 +68,8 @@ namespace Zork.Core.Clock
             bool f;
             int i, j, bc, br;
 
-            if (ri == 0) {
+            if (ri == 0)
+            {
                 return;
             }
             /* 						!IGNORE DISABLED. */
@@ -101,11 +102,11 @@ namespace Zork.Core.Clock
             }
 
             throw new InvalidOperationException();
-            //bug_(3, ri);
+        //bug_(3, ri);
 
-            /* CEV1--	CURE CLOCK.  LET PLAYER SLOWLY RECOVER. */
+        /* CEV1--	CURE CLOCK.  LET PLAYER SLOWLY RECOVER. */
 
-            L1000:
+        L1000:
             /* Computing MIN */
             i__1 = 0;
             i__2 = game.Adventurers.astren[(int)AIndices.player - 1] + 1;
@@ -122,9 +123,9 @@ namespace Zork.Core.Clock
             /* 						!NO, WAIT SOME MORE. */
             return;
 
-            /* CEV2--	MAINT-ROOM WITH LEAK.  RAISE THE WATER LEVEL. */
+        /* CEV2--	MAINT-ROOM WITH LEAK.  RAISE THE WATER LEVEL. */
 
-            L2000:
+        L2000:
             if (game.Player.Here == (int)RoomIndices.maint)
             {
                 i__1 = game.Switches.rvmnt / 2 + 71;
@@ -154,32 +155,32 @@ namespace Zork.Core.Clock
             /* 						!DROWN HIM IF PRESENT. */
             return;
 
-            /* CEV3--	LANTERN.  DESCRIBE GROWING DIMNESS. */
+        /* CEV3--	LANTERN.  DESCRIBE GROWING DIMNESS. */
 
-            L3000:
+        L3000:
             litint_(game, (int)ObjectIndices.lamp, game.Switches.orlamp, (int)ClockIndices.cevlnt, lmptck, 12);
             /* 						!DO LIGHT INTERRUPT. */
             return;
 
-            /* CEV4--	MATCH.  OUT IT GOES. */
+        /* CEV4--	MATCH.  OUT IT GOES. */
 
-            L4000:
+        L4000:
             MessageHandler.rspeak_(game, 153);
             /* 						!MATCH IS OUT. */
             game.Objects.oflag1[(int)ObjectIndices.match - 1] &= ~ObjectFlags.ONBT;
             return;
 
-            /* CEV5--	CANDLE.  DESCRIBE GROWING DIMNESS. */
+        /* CEV5--	CANDLE.  DESCRIBE GROWING DIMNESS. */
 
-            L5000:
+        L5000:
             litint_(game, (int)ObjectIndices.candl, game.Switches.orcand, (int)ClockIndices.cevcnd, cndtck, 10);
             /* 						!DO CANDLE INTERRUPT. */
             return;
-            /* CEVAPP, PAGE 3 */
+        /* CEVAPP, PAGE 3 */
 
-            /* CEV6--	BALLOON */
+        /* CEV6--	BALLOON */
 
-            L6000:
+        L6000:
             game.Clock.Ticks[(int)ClockIndices.cevbal - 1] = 3;
             /* 						!RESCHEDULE INTERRUPT. */
             f = game.Adventurers.Vehicles[game.Player.Winner - 1] == (int)ObjectIndices.ballo;
@@ -196,21 +197,24 @@ namespace Zork.Core.Clock
             }
 
             /* 						!ON LEDGE? */
-            if ((game.Objects.oflag2[(int)ObjectIndices.recep - 1] & ObjectFlags2.OPENBT) != 0 && game.Switches.binff != 0) {
+            if ((game.Objects.oflag2[(int)ObjectIndices.recep - 1] & ObjectFlags2.OPENBT) != 0 && game.Switches.binff != 0)
+            {
                 goto L6500;
             }
 
             /* BALLOON IS IN MIDAIR AND IS DEFLATED (OR HAS RECEPTACLE CLOSED). */
             /* FALL TO NEXT ROOM. */
 
-            if (game.State.bloc != (int)RoomIndices.vair1) {
+            if (game.State.bloc != (int)RoomIndices.vair1)
+            {
                 goto L6300;
             }
             /* 						!IN VAIR1? */
             game.State.bloc = (int)RoomIndices.vlbot;
             /* 						!YES, NOW AT VLBOT. */
             ObjectHandler.newsta_(game, (int)ObjectIndices.ballo, 0, game.State.bloc, 0, 0);
-            if (f) {
+            if (f)
+            {
                 goto L6200;
             }
 
@@ -224,10 +228,11 @@ namespace Zork.Core.Clock
             /* 						!ON LEDGE, DESCRIBE. */
             return;
 
-            L6200:
+        L6200:
             f = AdventurerHandler.moveto_(game, game.State.bloc, game.Player.Winner);
             /* 						!MOVE HIM. */
-            if (game.Switches.binff == 0) {
+            if (game.Switches.binff == 0)
+            {
                 goto L6250;
             }
             /* 						!IN BALLOON.  INFLATED? */
@@ -237,7 +242,7 @@ namespace Zork.Core.Clock
             /* 						!DESCRIBE. */
             return;
 
-            L6250:
+        L6250:
             ObjectHandler.newsta_(game, (int)ObjectIndices.ballo, 532, 0, 0, 0);
             /* 						!NO, BALLOON & CONTENTS DIE. */
             ObjectHandler.newsta_(game, (int)ObjectIndices.dball, 0, game.State.bloc, 0, 0);
@@ -251,11 +256,12 @@ namespace Zork.Core.Clock
             game.Switches.btief = 0;
             return;
 
-            L6300:
+        L6300:
             --game.State.bloc;
             /* 						!NOT IN VAIR1, DESCEND. */
             ObjectHandler.newsta_(game, (int)ObjectIndices.ballo, 0, game.State.bloc, 0, 0);
-            if (f) {
+            if (f)
+            {
                 goto L6400;
             }
             /* 						!IS HE IN BALLOON? */
@@ -267,7 +273,7 @@ namespace Zork.Core.Clock
             /* 						!IF ON LEDGE, DESCRIBE. */
             return;
 
-            L6400:
+        L6400:
             f = AdventurerHandler.moveto_(game, game.State.bloc, game.Player.Winner);
             /* 						!IN BALLOON, MOVE HIM. */
             MessageHandler.rspeak_(game, 534);
@@ -275,10 +281,10 @@ namespace Zork.Core.Clock
             f = RoomHandler.RoomDescription(0, game);
             return;
 
-            /* BALLOON IS IN MIDAIR AND IS INFLATED, UP-UP-AND-AWAY */
-            /* 						! */
+        /* BALLOON IS IN MIDAIR AND IS INFLATED, UP-UP-AND-AWAY */
+        /* 						! */
 
-            L6500:
+        L6500:
             if (game.State.bloc != (int)RoomIndices.vair4)
             {
                 goto L6600;
@@ -295,23 +301,25 @@ namespace Zork.Core.Clock
             /* 						!BALLOON & CONTENTS DIE. */
             ObjectHandler.newsta_(game, (int)ObjectIndices.dball, 0, game.State.bloc, 0, 0);
             /* 						!SUBSTITUTE DEAD BALLOON. */
-            if (f) {
+            if (f)
+            {
                 goto L6550;
             }
             /* 						!WAS HE IN IT? */
             if (game.Player.Here == (int)RoomIndices.ledg2 || game.Player.Here == (int)RoomIndices.ledg3 ||
-                game.Player.Here == (int)RoomIndices.ledg4 || game.Player.Here == (int)RoomIndices.vlbot) {
+                game.Player.Here == (int)RoomIndices.ledg4 || game.Player.Here == (int)RoomIndices.vlbot)
+            {
                 MessageHandler.rspeak_(game, 535);
             }
             /* 						!IF HE CAN SEE, DESCRIBE. */
             return;
 
-            L6550:
+        L6550:
             AdventurerHandler.jigsup_(game, 536);
             /* 						!IN BALLOON AT CRASH, DIE. */
             return;
 
-            L6600:
+        L6600:
             ++game.State.bloc;
             /* 						!NOT AT VAIR4, GO UP. */
             ObjectHandler.newsta_(game, (int)ObjectIndices.ballo, 0, game.State.bloc, 0, 0);
@@ -329,7 +337,7 @@ namespace Zork.Core.Clock
             /* 						!CAN HE SEE IT? */
             return;
 
-            L6650:
+        L6650:
             f = AdventurerHandler.moveto_(game, game.State.bloc, game.Player.Winner);
             /* 						!MOVE PLAYER. */
             MessageHandler.rspeak_(game, 538);
@@ -337,18 +345,20 @@ namespace Zork.Core.Clock
             f = RoomHandler.RoomDescription(0, game);
             return;
 
-            /* ON LEDGE, GOES TO MIDAIR ROOM WHETHER INFLATED OR NOT. */
+        /* ON LEDGE, GOES TO MIDAIR ROOM WHETHER INFLATED OR NOT. */
 
-            L6700:
+        L6700:
             game.State.bloc += (int)RoomIndices.vair2 - (int)RoomIndices.ledg2;
             /* 						!MOVE TO MIDAIR. */
             ObjectHandler.newsta_(game, (int)ObjectIndices.ballo, 0, game.State.bloc, 0, 0);
-            if (f) {
+            if (f)
+            {
                 goto L6750;
             }
             /* 						!IN BALLOON? */
             if (game.Player.Here == (int)RoomIndices.ledg2 || game.Player.Here == (int)RoomIndices.ledg3 ||
-                game.Player.Here == (int)RoomIndices.ledg4 || game.Player.Here == (int)RoomIndices.vlbot) {
+                game.Player.Here == (int)RoomIndices.ledg4 || game.Player.Here == (int)RoomIndices.vlbot)
+            {
                 MessageHandler.rspeak_(game, 539);
             }
             /* 						!NO, STRANDED. */
@@ -356,7 +366,7 @@ namespace Zork.Core.Clock
             /* 						!MATERIALIZE GNOME. */
             return;
 
-            L6750:
+        L6750:
             f = AdventurerHandler.moveto_(game, game.State.bloc, game.Player.Winner);
             /* 						!MOVE TO NEW ROOM. */
             MessageHandler.rspeak_(game, 540);
@@ -364,9 +374,9 @@ namespace Zork.Core.Clock
             f = RoomHandler.RoomDescription(0, game);
             return;
 
-            /* AT BOTTOM, GO UP IF INFLATED, DO NOTHING IF DEFLATED. */
+        /* AT BOTTOM, GO UP IF INFLATED, DO NOTHING IF DEFLATED. */
 
-            L6800:
+        L6800:
             if (game.Switches.binff == 0 || !((game.Objects.oflag2[(int)ObjectIndices.recep - 1] & ObjectFlags2.OPENBT) != 0))
             {
                 return;
@@ -376,28 +386,30 @@ namespace Zork.Core.Clock
             /* 						!INFLATED AND OPEN, */
             ObjectHandler.newsta_(game, (int)ObjectIndices.ballo, 0, game.State.bloc, 0, 0);
             /* 						!GO UP TO VAIR1. */
-            if (f) {
+            if (f)
+            {
                 goto L6850;
             }
             /* 						!IN BALLOON? */
             if (game.Player.Here == (int)RoomIndices.ledg2 || game.Player.Here == (int)RoomIndices.ledg3 ||
-                game.Player.Here == (int)RoomIndices.ledg4 || game.Player.Here == (int)RoomIndices.vlbot) {
+                game.Player.Here == (int)RoomIndices.ledg4 || game.Player.Here == (int)RoomIndices.vlbot)
+            {
                 MessageHandler.rspeak_(game, 541);
             }
             /* 						!IF CAN SEE, DESCRIBE. */
             return;
 
-            L6850:
+        L6850:
             f = AdventurerHandler.moveto_(game, game.State.bloc, game.Player.Winner);
             /* 						!MOVE PLAYER. */
             MessageHandler.rspeak_(game, 542);
             f = RoomHandler.RoomDescription(0, game);
             return;
-            /* CEVAPP, PAGE 4 */
+        /* CEVAPP, PAGE 4 */
 
-            /* CEV7--	BALLOON BURNUP */
+        /* CEV7--	BALLOON BURNUP */
 
-            L7000:
+        L7000:
             i__1 = game.Objects.Count;
             for (i = 1; i <= i__1; ++i)
             {
@@ -410,9 +422,9 @@ namespace Zork.Core.Clock
             }
 
             throw new InvalidOperationException();
-            //bug_(4, 0);
+        //bug_(4, 0);
 
-            L7200:
+        L7200:
             ObjectHandler.newsta_(game, i, 0, 0, 0, 0);
             /* 						!VANISH OBJECT. */
             game.Switches.binff = 0;
@@ -424,10 +436,11 @@ namespace Zork.Core.Clock
             /* 						!DESCRIBE. */
             return;
 
-            /* CEV8--	FUSE FUNCTION */
+        /* CEV8--	FUSE FUNCTION */
 
-            L8000:
-            if (game.Objects.ocan[(int)ObjectIndices.fuse - 1] != (int)ObjectIndices.brick) {
+        L8000:
+            if (game.Objects.ocan[(int)ObjectIndices.fuse - 1] != (int)ObjectIndices.brick)
+            {
                 goto L8500;
             }
             /* 						!IGNITED BRICK? */
@@ -435,14 +448,16 @@ namespace Zork.Core.Clock
             /* 						!GET BRICK ROOM. */
             bc = game.Objects.ocan[(int)ObjectIndices.brick - 1];
             /* 						!GET CONTAINER. */
-            if (br == 0 && bc != 0) {
+            if (br == 0 && bc != 0)
+            {
                 br = game.Objects.oroom[bc - 1];
             }
             ObjectHandler.newsta_(game, (int)ObjectIndices.fuse, 0, 0, 0, 0);
             /* 						!KILL FUSE. */
             ObjectHandler.newsta_(game, (int)ObjectIndices.brick, 0, 0, 0, 0);
             /* 						!KILL BRICK. */
-            if (br != 0 && br != game.Player.Here) {
+            if (br != 0 && br != game.Player.Here)
+            {
                 goto L8100;
             }
             /* 						!BRICK ELSEWHERE? */
@@ -454,18 +469,20 @@ namespace Zork.Core.Clock
             /* 						!DEAD. */
             return;
 
-            L8100:
+        L8100:
             MessageHandler.rspeak_(game, 151);
             /* 						!BOOM. */
             game.State.mungrm = br;
             /* 						!SAVE ROOM THAT BLEW. */
             game.Clock.Ticks[(int)ClockIndices.cevsaf - 1] = 5;
             /* 						!SET SAFE INTERRUPT. */
-            if (br != (int)RoomIndices.msafe) {
+            if (br != (int)RoomIndices.msafe)
+            {
                 goto L8200;
             }
             /* 						!BLEW SAFE ROOM? */
-            if (bc != (int)ObjectIndices.sslot) {
+            if (bc != (int)ObjectIndices.sslot)
+            {
                 return;
             }
             /* 						!WAS BRICK IN SAFE? */
@@ -476,7 +493,7 @@ namespace Zork.Core.Clock
             /* 						!INDICATE SAFE BLOWN. */
             return;
 
-            L8200:
+        L8200:
             i__1 = game.Objects.Count;
             for (i = 1; i <= i__1; ++i)
             {
@@ -505,7 +522,7 @@ namespace Zork.Core.Clock
             }
             return;
 
-            L8500:
+        L8500:
             if (ObjectHandler.qhere_(game, (int)ObjectIndices.fuse, game.Player.Here) || game.Objects.oadv[(int)ObjectIndices.fuse - 1] == game.Player.Winner)
             {
                 MessageHandler.rspeak_(game, 152);
@@ -513,11 +530,11 @@ namespace Zork.Core.Clock
             ObjectHandler.newsta_(game, (int)ObjectIndices.fuse, 0, 0, 0, 0);
             /* 						!KILL FUSE. */
             return;
-            /* CEVAPP, PAGE 5 */
+        /* CEVAPP, PAGE 5 */
 
-            /* CEV9--	LEDGE MUNGE. */
+        /* CEV9--	LEDGE MUNGE. */
 
-            L9000:
+        L9000:
             game.Rooms.RoomFlags[(int)RoomIndices.ledg4 - 1] |= RoomFlags.RMUNG;
             game.Rooms.RoomActions[(int)RoomIndices.ledg4 - 1] = 109;
             if (game.Player.Here == (int)RoomIndices.ledg4)
@@ -530,7 +547,7 @@ namespace Zork.Core.Clock
             /* 						!NO, NARROW ESCAPE. */
             return;
 
-            L9100:
+        L9100:
             if (game.Adventurers.Vehicles[game.Player.Winner - 1] != 0)
             {
                 goto L9200;
@@ -541,7 +558,7 @@ namespace Zork.Core.Clock
             /* 						!NO, DEAD. */
             return;
 
-            L9200:
+        L9200:
             if (game.Switches.btief != 0)
             {
                 goto L9300;
@@ -551,7 +568,7 @@ namespace Zork.Core.Clock
             /* 						!NO, NO PLACE TO LAND. */
             return;
 
-            L9300:
+        L9300:
             game.State.bloc = (int)RoomIndices.vlbot;
             /* 						!YES, CRASH BALLOON. */
             ObjectHandler.newsta_(game, (int)ObjectIndices.ballo, 0, 0, 0, 0);
@@ -566,9 +583,9 @@ namespace Zork.Core.Clock
             /* 						!DEAD */
             return;
 
-            /* CEV10--	SAFE MUNG. */
+        /* CEV10--	SAFE MUNG. */
 
-            L10000:
+        L10000:
             game.Rooms.RoomFlags[game.State.mungrm - 1] |= RoomFlags.RMUNG;
             game.Rooms.RoomActions[game.State.mungrm - 1] = 114;
             if (game.Player.Here == game.State.mungrm)
@@ -586,7 +603,7 @@ namespace Zork.Core.Clock
             /* 						!START LEDGE CLOCK. */
             return;
 
-            L10100:
+        L10100:
             i = 116;
             /* 						!HE'S DEAD, */
             if ((game.Rooms.RoomFlags[game.Player.Here - 1] & RoomFlags.RHOUSE) != 0)
@@ -597,13 +614,14 @@ namespace Zork.Core.Clock
             AdventurerHandler.jigsup_(game, i);
             /* 						!LET HIM KNOW. */
             return;
-            /* CEVAPP, PAGE 6 */
+        /* CEVAPP, PAGE 6 */
 
-            /* CEV11--	VOLCANO GNOME */
+        /* CEV11--	VOLCANO GNOME */
 
-            L11000:
+        L11000:
             if (game.Player.Here == (int)RoomIndices.ledg2 || game.Player.Here == (int)RoomIndices.ledg3 ||
-                game.Player.Here == (int)RoomIndices.ledg4 || game.Player.Here == (int)RoomIndices.vlbot) {
+                game.Player.Here == (int)RoomIndices.ledg4 || game.Player.Here == (int)RoomIndices.vlbot)
+            {
                 goto L11100;
             }
             /* 						!IS HE ON LEDGE? */
@@ -611,48 +629,49 @@ namespace Zork.Core.Clock
             /* 						!NO, WAIT A WHILE. */
             return;
 
-            L11100:
+        L11100:
             ObjectHandler.newsta_(game, (int)ObjectIndices.gnome, 118, game.Player.Here, 0, 0);
             /* 						!YES, MATERIALIZE GNOME. */
             return;
 
-            /* CEV12--	VOLCANO GNOME DISAPPEARS */
+        /* CEV12--	VOLCANO GNOME DISAPPEARS */
 
-            L12000:
+        L12000:
             ObjectHandler.newsta_(game, (int)ObjectIndices.gnome, 149, 0, 0, 0);
             /* 						!DISAPPEAR THE GNOME. */
             return;
 
-            /* CEV13--	BUCKET. */
+        /* CEV13--	BUCKET. */
 
-            L13000:
-            if (game.Objects.ocan[(int)ObjectIndices.water - 1] == (int)ObjectIndices.bucke) {
+        L13000:
+            if (game.Objects.ocan[(int)ObjectIndices.water - 1] == (int)ObjectIndices.bucke)
+            {
                 ObjectHandler.newsta_(game, (int)ObjectIndices.water, 0, 0, 0, 0);
             }
             return;
 
-            /* CEV14--	SPHERE.  IF EXPIRES, HE'S TRAPPED. */
+        /* CEV14--	SPHERE.  IF EXPIRES, HE'S TRAPPED. */
 
-            L14000:
+        L14000:
             game.Rooms.RoomFlags[(int)RoomIndices.cager - 1] |= RoomFlags.RMUNG;
             game.Rooms.RoomActions[(int)RoomIndices.cager - 1] = 147;
             AdventurerHandler.jigsup_(game, 148);
             /* 						!MUNG PLAYER. */
             return;
 
-            /* CEV15--	END GAME HERALD. */
+        /* CEV15--	END GAME HERALD. */
 
-            L15000:
+        L15000:
             game.Flags.endgmf = true;
             /* 						!WE'RE IN ENDGAME. */
             MessageHandler.rspeak_(game, 119);
             /* 						!INFORM OF ENDGAME. */
             return;
-            /* CEVAPP, PAGE 7 */
+        /* CEVAPP, PAGE 7 */
 
-            /* CEV16--	FOREST MURMURS */
+        /* CEV16--	FOREST MURMURS */
 
-            L16000:
+        L16000:
             game.Clock.Flags[(int)ClockIndices.cevfor - 1] = game.Player.Here == (int)RoomIndices.mtree
                 || game.Player.Here >= (int)RoomIndices.fore1 && game.Player.Here < (int)RoomIndices.clear;
 
@@ -663,22 +682,24 @@ namespace Zork.Core.Clock
 
             return;
 
-            /* CEV17--	SCOL ALARM */
+        /* CEV17--	SCOL ALARM */
 
-            L17000:
-            if (game.Player.Here == (int)RoomIndices.bktwi) {
+        L17000:
+            if (game.Player.Here == (int)RoomIndices.bktwi)
+            {
                 game.Clock.Flags[(int)ClockIndices.cevzgi - 1] = true;
             }
             /* 						!IF IN TWI, GNOME. */
-            if (game.Player.Here == (int)RoomIndices.bkvau) {
+            if (game.Player.Here == (int)RoomIndices.bkvau)
+            {
                 AdventurerHandler.jigsup_(game, 636);
             }
             /* 						!IF IN VAU, DEAD. */
             return;
 
-            /* CEV18--	ENTER GNOME OF ZURICH */
+        /* CEV18--	ENTER GNOME OF ZURICH */
 
-            L18000:
+        L18000:
             game.Clock.Flags[(int)ClockIndices.cevzgo - 1] = true;
             /* 						!EXITS, TOO. */
             ObjectHandler.newsta_(game, (int)ObjectIndices.zgnom, 0, (int)RoomIndices.bktwi, 0, 0);
@@ -690,22 +711,24 @@ namespace Zork.Core.Clock
             /* 						!ANNOUNCE. */
             return;
 
-            /* CEV19--	EXIT GNOME */
+        /* CEV19--	EXIT GNOME */
 
-            L19000:
+        L19000:
             ObjectHandler.newsta_(game, (int)ObjectIndices.zgnom, 0, 0, 0, 0);
             /* 						!VANISH. */
-            if (game.Player.Here == (int)RoomIndices.bktwi) {
+            if (game.Player.Here == (int)RoomIndices.bktwi)
+            {
                 MessageHandler.rspeak_(game, 638);
             }
             /* 						!ANNOUNCE. */
             return;
-            /* CEVAPP, PAGE 8 */
+        /* CEVAPP, PAGE 8 */
 
-            /* CEV20--	START OF ENDGAME */
+        /* CEV20--	START OF ENDGAME */
 
-            L20000:
-            if (game.Flags.spellf) {
+        L20000:
+            if (game.Flags.spellf)
+            {
                 goto L20200;
             }
             /* 						!SPELL HIS WAY IN? */
@@ -723,10 +746,10 @@ namespace Zork.Core.Clock
             /* 						!RESCHEDULE. */
             return;
 
-            L20100:
+        L20100:
             MessageHandler.rspeak_(game, 727);
-            /* 						!ANNOUNCE. */
-            L20200:
+        /* 						!ANNOUNCE. */
+        L20200:
             i__1 = game.Objects.Count;
             for (i = 1; i <= i__1; ++i)
             {
@@ -767,12 +790,12 @@ namespace Zork.Core.Clock
             f = RoomHandler.RoomDescription(3, game);
             /* 						!AND DESCRIBE. */
             return;
-            /* 						!BAM */
-            /* 						! */
+        /* 						!BAM */
+        /* 						! */
 
-            /* CEV21--	MIRROR CLOSES. */
+        /* CEV21--	MIRROR CLOSES. */
 
-            L21000:
+        L21000:
             game.Flags.mrpshf = false;
             /* 						!BUTTON IS OUT. */
             game.Flags.mropnf = false;
@@ -788,12 +811,13 @@ namespace Zork.Core.Clock
                 MessageHandler.rspeak_(game, 729);
             }
             return;
-            /* CEVAPP, PAGE 9 */
+        /* CEVAPP, PAGE 9 */
 
-            /* CEV22--	DOOR CLOSES. */
+        /* CEV22--	DOOR CLOSES. */
 
-            L22000:
-            if (game.Flags.wdopnf) {
+        L22000:
+            if (game.Flags.wdopnf)
+            {
                 MessageHandler.rspeak_(game, 730);
             }
             /* 						!DESCRIBE. */
@@ -801,10 +825,11 @@ namespace Zork.Core.Clock
             /* 						!CLOSED. */
             return;
 
-            /* CEV23--	INQUISITOR'S QUESTION */
+        /* CEV23--	INQUISITOR'S QUESTION */
 
-            L23000:
-            if (game.Adventurers.Rooms[(int)AIndices.player - 1] != (int)RoomIndices.fdoor) {
+        L23000:
+            if (game.Adventurers.Rooms[(int)AIndices.player - 1] != (int)RoomIndices.fdoor)
+            {
                 return;
             }
             /* 						!IF PLAYER LEFT, DIE. */
@@ -814,10 +839,11 @@ namespace Zork.Core.Clock
             game.Clock.Ticks[(int)ClockIndices.cevinq - 1] = 2;
             return;
 
-            /* CEV24--	MASTER FOLLOWS */
+        /* CEV24--	MASTER FOLLOWS */
 
-            L24000:
-            if (game.Adventurers.Rooms[(int)AIndices.amastr - 1] == game.Player.Here) {
+        L24000:
+            if (game.Adventurers.Rooms[(int)AIndices.amastr - 1] == game.Player.Here)
+            {
                 return;
             }
             /* 						!NO MOVEMENT, DONE. */
@@ -835,7 +861,7 @@ namespace Zork.Core.Clock
             game.Flags.follwf = false;
             return;
 
-            L24100:
+        L24100:
             game.Flags.follwf = true;
             /* 						!FOLLOWING. */
             i = 812;
@@ -857,10 +883,10 @@ namespace Zork.Core.Clock
             game.Adventurers.Rooms[(int)AIndices.amastr - 1] = game.Player.Here;
             /* 						!MOVE MASTER PLAYER. */
             return;
-
         }
 
         /* LITINT-	LIGHT INTERRUPT PROCESSOR */
+
         public static void litint_(Game game, int obj, int ctr, int cev, int[] ticks, int tickln)
         {
             /* Parameter adjustments */
@@ -871,7 +897,8 @@ namespace Zork.Core.Clock
             /* 						!ADVANCE STATE CNTR. */
             game.Clock.Ticks[cev - 1] = ticks[ctr];
             /* 						!RESET INTERRUPT. */
-            if (game.Clock.Ticks[cev - 1] != 0) {
+            if (game.Clock.Ticks[cev - 1] != 0)
+            {
                 goto L100;
             }
             /* 						!EXPIRED? */
@@ -882,7 +909,7 @@ namespace Zork.Core.Clock
             }
             return;
 
-            L100:
+        L100:
             if (game.Objects.oroom[obj - 1] == game.Player.Here || game.Objects.oadv[obj - 1] == game.Player.Winner)
             {
                 MessageHandler.rspeak_(game, ticks[ctr + tickln / 2]);

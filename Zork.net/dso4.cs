@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Zork.Core.Object;
 
 namespace Zork.Core
@@ -28,7 +26,7 @@ namespace Zork.Core
                 ObjectHandler.newsta_(i, 0, nr, (int)nc, na, game);
                 /* 						!STEAL OBJECT */
                 ++ret_val;
-                L100:
+            L100:
                 ;
             }
             return ret_val;
@@ -47,7 +45,8 @@ namespace Zork.Core
             ret_val = 0;
             /* 						!COUNT OBJECTS */
             i__1 = game.Objects.Count;
-            for (i = 1; i <= i__1; ++i) {
+            for (i = 1; i <= i__1; ++i)
+            {
                 /* 						!LOOP ON OBJECTS. */
                 if (!ObjectHandler.qhere_(i, rm, game))
                 {
@@ -63,13 +62,13 @@ namespace Zork.Core
                 ++ret_val;
                 game.Objects.oflag2[i - 1] |= ObjectFlags2.TCHBT;
                 goto L100;
-                L50:
+            L50:
                 if ((game.Objects.oflag2[i - 1] & ObjectFlags2.ACTRBT) != 0)
                 {
                     i__2 = ObjectHandler.GetActor(i, game);
                     ret_val += robadv_(game, i__2, nr, (ObjectIndices)nc, na);
                 }
-                L100:
+            L100:
                 ;
             }
             return ret_val;
@@ -87,29 +86,32 @@ namespace Zork.Core
             /* Local variables */
             int ps, vs;
 
-
             /* OBJECTS */
             vs = game.Objects.ocapac[vl - 1];
             /* 						!VILLAIN STRENGTH */
             ps = vs - fights_(game, hr, true);
             /* 						!HIS MARGIN OVER HERO */
             ret_val = RoomHandler.prob_(game, 90, 100);
-            if (ps > 3) {
+            if (ps > 3)
+            {
                 return ret_val;
             }
             /* 						!+3... 90% WINNING */
             ret_val = RoomHandler.prob_(game, 75, 85);
-            if (ps > 0) {
+            if (ps > 0)
+            {
                 return ret_val;
             }
             /* 						!>0... 75% WINNING */
             ret_val = RoomHandler.prob_(game, 50, 30);
-            if (ps == 0) {
+            if (ps == 0)
+            {
                 return ret_val;
             }
             /* 						!=0... 50% WINNING */
             ret_val = RoomHandler.prob_(game, 25, 25);
-            if (vs > 1) {
+            if (vs > 1)
+            {
                 return ret_val;
             }
             /* 						!ANY VILLAIN STRENGTH. */
@@ -118,6 +120,7 @@ namespace Zork.Core
         } /* winnin_ */
 
         /* FIGHTS-- COMPUTE FIGHT STRENGTH */
+
         public static int fights_(Game game, int h, bool flg)
         {
             const int smin = 2;
@@ -127,7 +130,8 @@ namespace Zork.Core
             int ret_val;
 
             ret_val = smin + ((smax - smin) * game.Adventurers.Scores[h - 1] + game.State.MaxScore / 2) / game.State.MaxScore;
-            if (flg) {
+            if (flg)
+            {
                 ret_val += game.Adventurers.astren[h - 1];
             }
             return ret_val;
@@ -156,11 +160,12 @@ namespace Zork.Core
             game.Flags.thfenf = false;
             /* 						!THIEF UNENGROSSED. */
             ret_val = Math.Min(ret_val, 2);
-            /* 						!NO BETTER THAN 2. */
+        /* 						!NO BETTER THAN 2. */
 
-            L100:
+        L100:
             i__1 = game.Villians.Count;
-            for (i = 1; i <= i__1; ++i) {
+            for (i = 1; i <= i__1; ++i)
+            {
                 /* 						!SEE IF  BEST WEAPON. */
                 if (game.Villians.villns[i - 1] == v && game.ParserVectors.prsi == game.Villians.vbest[i - 1])
                 {

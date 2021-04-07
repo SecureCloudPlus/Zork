@@ -1,5 +1,4 @@
-﻿using Zork.Core;
-using Zork.Core.Object;
+﻿using Zork.Core.Object;
 using Zork.Core.Room;
 
 namespace Zork.Core
@@ -37,7 +36,7 @@ namespace Zork.Core
                 i = 0;
 
                 MessageHandler.rspsub_(502, game.Objects.odesc2[j - 1], game);
-                L10:
+            L10:
                 ;
             }
 
@@ -55,7 +54,7 @@ namespace Zork.Core
             // !NO, TELL HIM.
             return;
 
-            L25:
+        L25:
             i__1 = game.Objects.Count;
             for (j = 1; j <= i__1; ++j)
             {
@@ -72,8 +71,8 @@ namespace Zork.Core
                     ObjectHandler.PrintDescription(j, 573, game);
                 }
 
-                // !IF NOT EMPTY, LIST.
-                L100:
+            // !IF NOT EMPTY, LIST.
+            L100:
                 ;
             }
         }
@@ -116,7 +115,7 @@ namespace Zork.Core
             // !SEND TO HYPER SPACE.
             return;
 
-            L100:
+        L100:
             if (game.Flags.endgmf)
             {
                 goto L900;
@@ -192,11 +191,11 @@ namespace Zork.Core
                 // !MOVE TO RANDOM LOCATIONS.
 
                 ObjectHandler.newsta_(j, 0, rlist[i - 1], 0, 0, game);
-                L200:
+            L200:
                 ;
             }
 
-            L400:
+        L400:
             i = game.Rooms.Count + 1;
 
             // !NOW MOVE VALUABLES.
@@ -209,7 +208,7 @@ namespace Zork.Core
                 {
                     goto L300;
                 }
-                L250:
+            L250:
                 --i;
                 // !FIND NEXT ROOM.
                 if ((game.Rooms.RoomFlags[i - 1] & (RoomFlags)nonofl) != 0)
@@ -218,8 +217,8 @@ namespace Zork.Core
                 }
 
                 ObjectHandler.newsta_(j, 0, i, 0, 0, game);
-                // !YES, MOVE.
-                L300:
+            // !YES, MOVE.
+            L300:
                 ;
             }
 
@@ -231,7 +230,7 @@ namespace Zork.Core
                 {
                     goto L500;
                 }
-                L450:
+            L450:
                 --i;
                 // !FIND NEXT ROOM.
                 if ((game.Rooms.RoomFlags[i - 1] & (RoomFlags)nonofl) != 0)
@@ -240,22 +239,22 @@ namespace Zork.Core
                 }
 
                 ObjectHandler.newsta_(j, 0, i, 0, 0, game);
-                L500:
+            L500:
                 ;
             }
             return;
 
-            // CAN'T OR WON'T CONTINUE, CLEAN UP AND EXIT.
+        // CAN'T OR WON'T CONTINUE, CLEAN UP AND EXIT.
 
-            L900:
+        L900:
             MessageHandler.Speak(625, game);
             // !IN ENDGAME, LOSE.
             goto L1100;
 
-            L1000:
+        L1000:
             MessageHandler.Speak(7, game);
-            // !INVOLUNTARY EXIT.
-            L1100:
+        // !INVOLUNTARY EXIT.
+        L1100:
             AdventurerHandler.score_(game, false);
             // !TELL SCORE.
 
@@ -263,6 +262,7 @@ namespace Zork.Core
         }
 
         public static bool moveto_(Game game, RoomIndices nr, int who) => moveto_(game, (int)nr, who);
+
         public static bool moveto_(Game game, int nr, int who)
         {
             // System generated locals
@@ -297,7 +297,7 @@ namespace Zork.Core
             // !CAN'T GO WITHOUT VEHICLE.
             return ret_val;
 
-            L100:
+        L100:
             bits = 0;
             // !ASSUME NOWHERE.
             if (j == (int)ObjectIndices.rboat)
@@ -324,7 +324,7 @@ namespace Zork.Core
                 goto L800;
             }
 
-            L500:
+        L500:
             ret_val = true;
             // !MOVE SHOULD SUCCEED.
             if ((game.Rooms.RoomFlags[nr - 1] & RoomFlags.RMUNG) == 0)
@@ -336,7 +336,7 @@ namespace Zork.Core
             // !YES, TELL HOW.
             return ret_val;
 
-            L600:
+        L600:
             if (who != (int)AIndices.player)
             {
                 ObjectHandler.newsta_(game.Adventurers.Objects[who - 1], 0, nr, 0, 0, game);
@@ -354,7 +354,7 @@ namespace Zork.Core
             game.Rooms.RoomValues[nr - 1] = 0;
             return ret_val;
 
-            L800:
+        L800:
             MessageHandler.rspsub_(428, game.Objects.odesc2[j - 1], game);
             // !WRONG VEHICLE.
             return ret_val;
@@ -412,12 +412,12 @@ namespace Zork.Core
                 // L10:
             }
 
-            L50:
+        L50:
             i__1 = i + 484;
             MessageHandler.Speak(i__1, game);
             return;
 
-            L60:
+        L60:
             MessageHandler.more_output(string.Empty);
             MessageHandler.more_output("Your score in the endgame ");
 
@@ -441,7 +441,7 @@ namespace Zork.Core
                 // L70:
             }
 
-            L80:
+        L80:
             i__1 = i + 786;
             MessageHandler.Speak(i__1, game);
         }
@@ -474,7 +474,7 @@ namespace Zork.Core
             game.Clock.Ticks[(int)ClockIndices.cevegh - 1] = 15;
             return;
 
-            L100:
+        L100:
             game.State.egscor += n;
             // !UPDATE EG SCORE.
         }

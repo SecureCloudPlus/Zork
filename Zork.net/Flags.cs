@@ -66,6 +66,7 @@
         /// Gets or sets the number of matches.
         /// </summary>
         public int ormtch { get; set; }
+
         public int orlamp { get; set; }
         public int mdir { get; set; }
         public int mloc { get; set; }

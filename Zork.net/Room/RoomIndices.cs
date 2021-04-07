@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Zork.Core.Room
+﻿namespace Zork.Core.Room
 {
     public enum RoomIndices
     {
@@ -23,11 +19,11 @@ namespace Zork.Core.Room
         tshaf = 61,
         bshaf = 76,
         mmach = 77,
-        dome  = 79,
+        dome = 79,
         mtorc = 80,
         carou = 83,
         riddl = 91,
-        lld2  = 94,
+        lld2 = 94,
         temp1 = 96,
         temp2 = 97,
         maint = 100,
@@ -43,7 +39,7 @@ namespace Zork.Core.Room
         falls = 120,
         mbarr = 119,
         mrain = 121,
-        pog   = 122,
+        pog = 122,
         vlbot = 126,
         vair1 = 127,
         vair2 = 128,
@@ -62,7 +58,7 @@ namespace Zork.Core.Room
         alitr = 146,
         mtree = 147,
         bkent = 148,
-        bkvw  = 151,
+        bkvw = 151,
         bktwi = 153,
         bkvau = 154,
         bkbox = 155,
@@ -70,23 +66,23 @@ namespace Zork.Core.Room
         tstrs = 158,
         mrant = 159,
         mreye = 160,
-        mra   = 161,
-        mrb   = 162,
-        mrc   = 163,
-        mrg   = 164,
-        mrd   = 165,
+        mra = 161,
+        mrb = 162,
+        mrc = 163,
+        mrg = 164,
+        mrd = 165,
         fdoor = 166,
-        mrae  = 167,
-        mrce  = 171,
-        mrcw  = 172,
-        mrge  = 173,
-        mrgw  = 174,
-        mrdw  = 176,
+        mrae = 167,
+        mrce = 171,
+        mrcw = 172,
+        mrge = 173,
+        mrgw = 174,
+        mrdw = 176,
         inmir = 177,
         scorr = 179,
         ncorr = 182,
         parap = 183,
-        cell  = 184,
+        cell = 184,
         pcell = 185,
         ncell = 186,
         cpant = 188,
@@ -94,90 +90,3 @@ namespace Zork.Core.Room
         cpuzz = 190,
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

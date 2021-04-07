@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Zork.Core.Object;
 using Zork.Core.Room;
 
@@ -9,6 +7,7 @@ namespace Zork.Core
     public static class actors
     {
         /* AAPPLI- APPLICABLES FOR ADVENTURERS */
+
         public static bool aappli_(Game game, int ri)
         {
             /* System generated locals */
@@ -32,25 +31,24 @@ namespace Zork.Core
             }
             /* 						!BRANCH ON ADV. */
             throw new InvalidOperationException();
-            //bug_(11, ri);
+        //bug_(11, ri);
 
-            /* COMMON FALSE RETURN. */
+        /* COMMON FALSE RETURN. */
 
-            L10:
+        L10:
             ret_val = false;
             return ret_val;
 
-            /* A1--	ROBOT.  PROCESS MOST COMMANDS GIVEN TO ROBOT. */
+        /* A1--	ROBOT.  PROCESS MOST COMMANDS GIVEN TO ROBOT. */
 
-            L1000:
+        L1000:
             if (game.ParserVectors.prsa != (int)VIndices.raisew || game.ParserVectors.prso != (int)ObjectIndices.rcage)
             {
-
                 goto L1200;
             }
             game.Clock.Flags[(int)ClockIndices.cevsph - 1] = false;
             /* 						!ROBOT RAISED CAGE. */
-            game.Player.Winner= (int)AIndices.player;
+            game.Player.Winner = (int)AIndices.player;
             /* 						!RESET FOR PLAYER. */
             f = AdventurerHandler.moveto_(game, (int)RoomIndices.cager, game.Player.Winner);
             /* 						!MOVE TO NEW ROOM. */
@@ -63,10 +61,10 @@ namespace Zork.Core
             game.Flags.cagesf = true;
             /* 						!CAGE SOLVED. */
             game.Objects.oflag1[(int)ObjectIndices.robot - 1] &= ~ObjectFlags.NDSCBT;
-            game.Objects.oflag1[(int)ObjectIndices.spher - 1] |=  ObjectFlags.TAKEBT;
+            game.Objects.oflag1[(int)ObjectIndices.spher - 1] |= ObjectFlags.TAKEBT;
             return ret_val;
 
-            L1200:
+        L1200:
             if (game.ParserVectors.prsa != (int)VIndices.drinkw && game.ParserVectors.prsa != (int)VIndices.eatw)
             {
                 goto L1300;
@@ -76,7 +74,7 @@ namespace Zork.Core
             /* 						!EAT OR DRINK, JOKE. */
             return ret_val;
 
-            L1300:
+        L1300:
             if (game.ParserVectors.prsa != (int)VIndices.readw)
             {
                 goto L1400;
@@ -86,7 +84,7 @@ namespace Zork.Core
             /* 						!JOKE. */
             return ret_val;
 
-            L1400:
+        L1400:
             if (game.ParserVectors.prsa == (int)VIndices.walkw || game.ParserVectors.prsa == (int)VIndices.takew ||
                 game.ParserVectors.prsa == (int)VIndices.dropw || game.ParserVectors.prsa == (int)VIndices.putw
                 || game.ParserVectors.prsa == (int)VIndices.pushw || game.ParserVectors.prsa ==
@@ -98,11 +96,11 @@ namespace Zork.Core
             MessageHandler.rspsub_(game, 570);
             /* 						!JOKE. */
             return ret_val;
-            /* AAPPLI, PAGE 3 */
+        /* AAPPLI, PAGE 3 */
 
-            /* A2--	MASTER.  PROCESS MOST COMMANDS GIVEN TO MASTER. */
+        /* A2--	MASTER.  PROCESS MOST COMMANDS GIVEN TO MASTER. */
 
-            L2000:
+        L2000:
             if ((game.Objects.oflag2[(int)ObjectIndices.qdoor - 1] & ObjectFlags2.OPENBT) != 0)
             {
                 goto L2100;
@@ -111,7 +109,7 @@ namespace Zork.Core
             /* 						!NO MASTER YET. */
             return ret_val;
 
-            L2100:
+        L2100:
             if (game.ParserVectors.prsa != (int)VIndices.walkw)
             {
                 goto L2200;
@@ -129,7 +127,7 @@ namespace Zork.Core
             MessageHandler.rspsub_(game, i);
             return ret_val;
 
-            L2200:
+        L2200:
             if (game.ParserVectors.prsa == (int)VIndices.takew || game.ParserVectors.prsa == (int)VIndices.dropw ||
                 game.ParserVectors.prsa == (int)VIndices.putw || game.ParserVectors.prsa ==
                 (int)VIndices.throww || game.ParserVectors.prsa == (int)VIndices.pushw ||
@@ -145,10 +143,10 @@ namespace Zork.Core
             MessageHandler.rspsub_(game, 786);
             /* 						!MASTER CANT DO IT. */
             return ret_val;
-
         } /* aappli_ */
 
         /* THIEFD-	INTERMOVE THIEF DEMON */
+
         public static void thiefd_(Game game)
         {
             /* System generated locals */
@@ -161,8 +159,8 @@ namespace Zork.Core
 
             /* 						!SET UP DETAIL FLAG. */
             once = false;
-            /* 						!INIT FLAG. */
-            L1025:
+        /* 						!INIT FLAG. */
+        L1025:
             rhere = game.Objects.oroom[(int)ObjectIndices.thief - 1];
             /* 						!VISIBLE POS. */
             if (rhere != 0)
@@ -196,7 +194,7 @@ namespace Zork.Core
             {
                 ObjectHandler.newsta_(game, (int)ObjectIndices.still, 0, 0, (int)ObjectIndices.thief, 0);
             }
-            L1050:
+        L1050:
             i__1 = -(int)ObjectIndices.thief;
             i = dso4.robadv_(game, i__1, game.Hack.thfpos, 0, 0);
             /* 						!DROP VALUABLES. */
@@ -206,9 +204,9 @@ namespace Zork.Core
             }
             goto L1700;
 
-            /* THIEF AND WINNER IN SAME ROOM. */
+        /* THIEF AND WINNER IN SAME ROOM. */
 
-            L1100:
+        L1100:
             if (game.Hack.thfpos == (int)RoomIndices.treas)
             {
                 goto L1700;
@@ -239,7 +237,7 @@ namespace Zork.Core
             /* 						!THIEF IS ANNOUNCED. */
             return;
 
-            L1150:
+        L1150:
             if (rhere == 0 || (game.Objects.oflag2[(int)ObjectIndices.thief - 1] & ObjectFlags2.FITEBT)
                 == 0)
             {
@@ -260,14 +258,14 @@ namespace Zork.Core
             }
             return;
 
-            L1175:
+        L1175:
             if (RoomHandler.prob_(game, 90, 90))
             {
                 goto L1700;
             }
-            /* 						!90% CHANCE TO STAY. */
+        /* 						!90% CHANCE TO STAY. */
 
-            L1200:
+        L1200:
             if (rhere == 0 || RoomHandler.prob_(game, 70, 70))
             {
                 goto L1250;
@@ -282,13 +280,13 @@ namespace Zork.Core
             }
             return;
 
-            L1300:
+        L1300:
             if (rhere == 0)
             {
                 goto L1700;
             }
-            /* 						!ANNOUNCED.  VISIBLE? */
-            L1250:
+        /* 						!ANNOUNCED.  VISIBLE? */
+        L1250:
             if (RoomHandler.prob_(game, 70, 70))
             {
                 return;
@@ -323,11 +321,11 @@ namespace Zork.Core
             }
             rhere = 0;
             goto L1700;
-            /* 						!ONWARD. */
+        /* 						!ONWARD. */
 
-            /* NOT IN ADVENTURERS ROOM. */
+        /* NOT IN ADVENTURERS ROOM. */
 
-            L1400:
+        L1400:
             ObjectHandler.newsta_(game, (int)ObjectIndices.thief, 0, 0, 0, 0);
             /* 						!VANISH. */
             rhere = 0;
@@ -371,12 +369,12 @@ namespace Zork.Core
                 /* 						!MOST OF THE TIME. */
                 game.Objects.oflag2[i - 1] |= ObjectFlags2.TCHBT;
                 goto L1700;
-                L1450:
+            L1450:
                 ;
             }
             goto L1700;
 
-            L1500:
+        L1500:
             i__1 = game.Objects.Count;
             for (i = 1; i <= i__1; ++i)
             {
@@ -392,13 +390,13 @@ namespace Zork.Core
                 ObjectHandler.newsta_(game, i, 0, 0, 0, i__2);
                 game.Objects.oflag2[i - 1] |= ObjectFlags2.TCHBT;
                 goto L1700;
-                L1550:
+            L1550:
                 ;
             }
 
-            /* NOW MOVE TO NEW ROOM. */
+        /* NOW MOVE TO NEW ROOM. */
 
-            L1700:
+        L1700:
             if (game.Objects.oadv[(int)ObjectIndices.rope - 1] == -(int)ObjectIndices.thief)
             {
                 game.Flags.domef = false;
@@ -408,7 +406,7 @@ namespace Zork.Core
                 goto L1800;
             }
             once = !once;
-            L1750:
+        L1750:
             --game.Hack.thfpos;
             /* 						!NEXT ROOM. */
             if (game.Hack.thfpos <= 0)
@@ -422,11 +420,11 @@ namespace Zork.Core
             game.Hack.thfflg = false;
             /* 						!NOT ANNOUNCED. */
             goto L1025;
-            /* 						!ONCE MORE. */
+        /* 						!ONCE MORE. */
 
-            /* ALL DONE. */
+        /* ALL DONE. */
 
-            L1800:
+        L1800:
             if (game.Hack.thfpos == (int)RoomIndices.treas)
             {
                 return;
@@ -450,11 +448,10 @@ namespace Zork.Core
 
                 ObjectHandler.newsta_(game, i, j, game.Hack.thfpos, 0, 0);
                 j = 0;
-                L1850:
+            L1850:
                 ;
             }
             return;
-
         }
     }
 }

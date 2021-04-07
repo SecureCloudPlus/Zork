@@ -89,6 +89,7 @@ namespace Zork.Core
         public int rnd_(int maxVal) => this.Random.Next(maxVal);
 
         private bool isRunning = true;
+
         public void Exit()
         {
             Console.WriteLine("The game is over.");
@@ -104,7 +105,7 @@ namespace Zork.Core
 
             while (this.isRunning)
             {
-                L100:
+            L100:
                 if (!this.isRunning)
                 {
                     // Game is over, exit this game loop.
@@ -140,7 +141,7 @@ namespace Zork.Core
                     //goto L2000;
                 }
 
-                L300:
+            L300:
                 if (this.ParserVectors.prso == (int)ObjectIndices.valua || this.ParserVectors.prso == (int)ObjectIndices.every)
                 {
                     goto L900;
@@ -151,7 +152,7 @@ namespace Zork.Core
                     goto L400;
                 }
 
-                L350:
+            L350:
                 if (!Flags.echof && this.Player.Here == (int)RoomIndices.echor)
                 {
                     goto L1000;
@@ -159,7 +160,7 @@ namespace Zork.Core
 
                 f = RoomHandler.rappli_(this.Rooms.RoomActions[this.Player.Here - 1], this);
 
-                L400:
+            L400:
                 xendmv_(this.Player.TelFlag);
 
                 // !DO END OF MOVE.
@@ -170,15 +171,15 @@ namespace Zork.Core
 
                 goto L100;
 
-                L900:
+            L900:
                 dverb1.valuac_(this, (int)ObjectIndices.valua);
                 goto L350;
-                // GAME, PAGE 3
+            // GAME, PAGE 3
 
-                // SPECIAL CASE-- ECHO ROOM.
-                // IF INPUT IS NOT 'ECHO' OR A DIRECTION, JUST ECHO.
+            // SPECIAL CASE-- ECHO ROOM.
+            // IF INPUT IS NOT 'ECHO' OR A DIRECTION, JUST ECHO.
 
-                L1000:
+            L1000:
                 input = Parser.ReadLine(0);
 
                 // !CHARGE FOR MOVES.
@@ -198,7 +199,7 @@ namespace Zork.Core
                 // !FORCE NEW INPUT.
                 goto L400;
 
-                L1300:
+            L1300:
                 this.ParserVectors.prswon = Parser.Parse(input, false, this);
                 if (!this.ParserVectors.prswon || this.ParserVectors.prsa != (int)VIndices.walkw)
                 {
@@ -208,20 +209,20 @@ namespace Zork.Core
                 {
                     goto L300;
                 }
-                // !VALID EXIT?
+            // !VALID EXIT?
 
-                L1400:
+            L1400:
                 MessageHandler.more_output(input);
                 this.Player.TelFlag = true;
                 // !INDICATE OUTPUT.
                 goto L1000;
-                // !MORE ECHO ROOM.
-                // GAME, PAGE 4
+            // !MORE ECHO ROOM.
+            // GAME, PAGE 4
 
-                // SPECIAL CASE-- TELL <ACTOR>, NEW COMMAND
-                // NOTE THAT WE CANNOT BE IN THE ECHO ROOM.
+            // SPECIAL CASE-- TELL <ACTOR>, NEW COMMAND
+            // NOTE THAT WE CANNOT BE IN THE ECHO ROOM.
 
-                L2000:
+            L2000:
                 if ((this.Objects.oflag2[this.ParserVectors.prso - 1] & ObjectFlags2.ACTRBT) != 0)
                 {
                     goto L2100;
@@ -230,9 +231,9 @@ namespace Zork.Core
                 MessageHandler.Speak(602, this);
                 // !CANT DO IT.
                 goto L350;
-                // !VAPPLI SUCCEEDS.
+            // !VAPPLI SUCCEEDS.
 
-                L2100:
+            L2100:
                 this.Player.Winner = ObjectHandler.GetActor(this.ParserVectors.prso, this);
                 // !NEW PLAYER.
                 this.Player.Here = this.Adventurers.Rooms[this.Player.Winner - 1];
@@ -249,7 +250,7 @@ namespace Zork.Core
                     goto L2150;
                 }
 
-                L2700:
+            L2700:
                 i = 341;
                 // !FAILS.
                 if (this.Player.TelFlag)
@@ -259,13 +260,13 @@ namespace Zork.Core
                 // !GIVE RESPONSE.
                 MessageHandler.Speak(i, this);
 
-                L2600:
+            L2600:
                 this.Player.Winner = (int)AIndices.player;
                 // !RESTORE STATE.
                 this.Player.Here = this.Adventurers.Rooms[this.Player.Winner - 1];
                 goto L350;
 
-                L2150:
+            L2150:
                 //if (ObjectHandler.aappli_(this.Adventurers.Actions[this.Player.Winner - 1], game))
                 //{
                 //    goto L2400;
@@ -290,13 +291,13 @@ namespace Zork.Core
                 // L2350:
                 f = RoomHandler.rappli_(this.Rooms.RoomActions[this.Player.Here - 1], this);
 
-                L2400:
+            L2400:
                 xendmv_(this.Player.TelFlag);
                 // !DO END OF MOVE.
                 goto L2600;
-                // !DONE.
+            // !DONE.
 
-                L2900:
+            L2900:
                 dverb1.valuac_(this, (int)ObjectIndices.valua);
                 // !ALL OR VALUABLES.
                 goto L350;
@@ -304,6 +305,7 @@ namespace Zork.Core
         }
 
         /* XENDMV-	EXECUTE END OF MOVE FUNCTIONS. */
+
         public void xendmv_(bool flag)
         {
             bool f;
@@ -341,6 +343,7 @@ namespace Zork.Core
         }
 
         /* XVEHIC- EXECUTE VEHICLE FUNCTION */
+
         public bool xvehic_(int n)
         {
             bool ret_val;

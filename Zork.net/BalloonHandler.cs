@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Zork.Core.Object;
+﻿using Zork.Core.Object;
 using Zork.Core.Room;
 
 namespace Zork.Core
@@ -33,10 +30,10 @@ namespace Zork.Core
             MessageHandler.Speak(game, 543);
             /* 						!NO. */
             goto L100;
-            L50:
+        L50:
             MessageHandler.rspsub_(game, 544, game.Objects.odesc2[game.Switches.binff - 1]);
-            /* 						!YES. */
-            L100:
+        /* 						!YES. */
+        L100:
             if (game.Switches.btief != 0)
             {
                 MessageHandler.Speak(game, 545);
@@ -44,7 +41,7 @@ namespace Zork.Core
             /* 						!HOOKED? */
             return ret_val;
 
-            L200:
+        L200:
             if (arg != 1)
             {
                 goto L500;
@@ -64,7 +61,7 @@ namespace Zork.Core
             /* 						!NO, JOKE. */
             return ret_val;
 
-            L250:
+        L250:
             if (game.Switches.btief == 0)
             {
                 goto L275;
@@ -74,7 +71,7 @@ namespace Zork.Core
             /* 						!YES, JOKE. */
             return ret_val;
 
-            L275:
+        L275:
             if (game.curxt_.xtype != xpars_.xnorm)
             {
                 goto L10;
@@ -84,11 +81,11 @@ namespace Zork.Core
             {
                 game.State.bloc = game.curxt_.xroom1;
             }
-            L10:
+        L10:
             ret_val = false;
             return ret_val;
 
-            L300:
+        L300:
             if (game.ParserVectors.prsa != (int)VIndices.takew || game.ParserVectors.prso != game.Switches.binff)
             {
                 goto L350;
@@ -97,7 +94,7 @@ namespace Zork.Core
             /* 						!RECEP CONT TOO HOT. */
             return ret_val;
 
-            L350:
+        L350:
             if (game.ParserVectors.prsa != (int)VIndices.putw
                 || game.ParserVectors.prsi != (int)ObjectIndices.recep
                 || ObjectHandler.qempty_(game, ObjectIndices.recep))
@@ -108,7 +105,7 @@ namespace Zork.Core
             MessageHandler.Speak(game, 549);
             return ret_val;
 
-            L500:
+        L500:
             if (game.ParserVectors.prsa != (int)VIndices.unboaw || (game.Rooms.RoomFlags[game.Player.Here - 1] & RoomFlags.RLAND) == 0)
             {
                 goto L600;
@@ -120,7 +117,7 @@ namespace Zork.Core
             /* 						!HE GOT OUT, START BALLOON. */
             goto L10;
 
-            L600:
+        L600:
             if (game.ParserVectors.prsa != (int)VIndices.burnw || game.Objects.ocan[game.ParserVectors.prso - 1] != (int)ObjectIndices.recep)
             {
                 goto L700;
@@ -145,7 +142,7 @@ namespace Zork.Core
             MessageHandler.Speak(game, 551);
             return ret_val;
 
-            L700:
+        L700:
             if (game.ParserVectors.prsa == (int)VIndices.unboaw && game.Switches.binff != 0
                 && (game.Rooms.RoomFlags[game.Player.Here - 1] & RoomFlags.RLAND) != 0)
             {
